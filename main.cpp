@@ -33,7 +33,7 @@ using namespace std;
 function Headers
  *****************************************************************************************/
 string commentParser(std::ifstream& inputStream,string fileName);
-void parser(Tokenizer& tempTokenizer);
+void parseTokens(Tokenizer& tempTokenizer);
 // functions to handle the open and close tags as they come into the parser.
 
 /** **************************************************************************************
@@ -83,6 +83,8 @@ int main(int argc, char *argv[]) {
     // now we open the c code file we generated without comments, by making our tokenizer object and pass in the new file name.
     Tokenizer tokenizer(tokenizeFile);
 
+    parseTokens(tokenizer);
+
     return 0;
 }
 
@@ -93,16 +95,19 @@ function to get tokens loop through file getting tokens from the tokenizer until
 @post: makes a list of tokens out of our comment fre output file.
  *****************************************************************************************/
 void parseTokens(Tokenizer& tempTokenizer){
+    cout<< "now converting comment free file into tokens==============="<<endl;
 
     //gets the first token of the file
     Token tempToken = tempTokenizer.getToken();
 
+    tempToken.print();
+
     //as long as the token recieved is not a eof keep looping through the file.
-    while (!tempToken.isEOF()) {
+    //while (!tempToken.isEOF()) {
         //keep grabbing new tokens and setting the next token as temptoken until we 
         //run out of tokens.
     
-    }
+    //}
 
 
 
@@ -125,7 +130,7 @@ string commentParser(std::ifstream& inputStream,string fileName){
     int startOfComment = -1;
 
     //keep looping through our dfa as long as we have input to read
-    while (!inputStream.eof()){
+    while(!inputStream.eof()){
 
         cout<<c;
         inputStream.get(c);

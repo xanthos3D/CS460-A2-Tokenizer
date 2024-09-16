@@ -20,34 +20,22 @@ Tokenizer::Tokenizer(std::string name) : lineNumber{ 1 },
 // for the case of our tokenizer there will be a lot.
 bool Tokenizer::charOfInterest(char c) {
     
-
-    //use code below as a example of how we may implement this depending on input. 
-    //the code below was used to find a char of interest for comments like // and /*
-    /*
-    if (c == '/') {
-        if (inputStream.peek() == '/') {
-            //std::cout<< "found char of interest // "<<std::endl;
-            return true;
-        }else if(inputStream.peek() == '*'){
-            //std::cout<< "found char of interest /* "<<std::endl;
-            return true;
-        }
-        return false;
-
+    //fill out the list of character we want to look out for when looping
+    //if char is a number or a alpha character then we found a craf of interest
+    if (isalnum(c)) {
+        return true;
     }else if(c == '*') {
-        if (inputStream.peek() == '/') {
-            //std::cout<< "found char of interest "<<std::endl;
-            return true;
-        }
-        return false;
-
-    }else if(c == '\n'){
-        //std::cout<< "found char of interest next line "<<std::endl;
-        
-
+        return true;
+    }else if(c == '-'){
+        return true;
+    }else if(c == '+'){
+        return true;
+    }else if(c == '/'){
+        return true;
+    }else if(c == '='){
         return true;
     }
-*/
+
     return false; 
 }
 
@@ -65,17 +53,42 @@ Token Tokenizer::getToken() {
         exit(2);
     }
 
+    // makes a token with the given line number and char position.
+    Token token(lineNumber, charPosition);
+
+    //state 0 of our dfa, havent seen any input or returning from previus states.
+    if(state == 0){
+
+    //std::cout<<"looping through on state 0"<<std::endl;
     //this eats up all non esential input we dont care about, such as spaces not inside a string token.
     while (inputStream.get(c) && !charOfInterest(c)) {
-        
-        std::cout<< c;
-        tempText += c;
         charPosition++;
 
     }
 
-    // makes a token with the given line number and char position.
-    Token token(lineNumber, charPosition);
+    if (inputStream.eof()) {
+        token.setEndOfFile();
+        return token;
+    //found a identifier
+    }else if(isalnum(c)){
+        //std::cout<<"found identifier"<<std::endl;
+        //grab all the rest of the characters in the identifier
+        tempText += c;
+        while (inputStream.get(c) && c != ' ') {
+        tempText += c;
+        charPosition++;
+        }
+
+        //set token and return it
+        token.setIdentifier(tempText);
+
+        return token;
+
+    }
+    
+
+    }
+
 
     // after this point is where our DFA will be defined. we want various state to acount for scenarious like string tokens,
     // this tokenizer class has a int named state which we should use to keep track of the state as we tokenize.
