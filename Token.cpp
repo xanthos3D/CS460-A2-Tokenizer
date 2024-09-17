@@ -165,6 +165,7 @@ void Token::print() {
     if (isEOF()) {
 
     }else{
+        std::cout<<std::endl;
         std::cout<< "Token type: ";
 
         if(isIdentifier()){

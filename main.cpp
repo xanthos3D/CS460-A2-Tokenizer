@@ -95,7 +95,7 @@ function to get tokens loop through file getting tokens from the tokenizer until
 @post: makes a list of tokens out of our comment fre output file.
  *****************************************************************************************/
 void parseTokens(Tokenizer& tempTokenizer){
-    cout<< "now converting comment free file into tokens==============="<<endl;
+    cout<< "Token list:"<<endl;
 
     //gets the first token of the file
     Token tempToken = tempTokenizer.getToken();
@@ -103,11 +103,14 @@ void parseTokens(Tokenizer& tempTokenizer){
     tempToken.print();
 
     //as long as the token recieved is not a eof keep looping through the file.
-    //while (!tempToken.isEOF()) {
+    while (!tempToken.isEOF()) {
         //keep grabbing new tokens and setting the next token as temptoken until we 
         //run out of tokens.
+
+        Token tempToken = tempTokenizer.getToken();
+        tempToken.print();
     
-    //}
+    }
 
 
 

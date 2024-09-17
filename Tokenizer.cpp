@@ -22,19 +22,51 @@ bool Tokenizer::charOfInterest(char c) {
     
     //fill out the list of character we want to look out for when looping
     //if char is a number or a alpha character then we found a craf of interest
-    if (isalnum(c)) {
+    if(state == 0){
+
+        //if we find a alpha character then we are likely working with a variable
+        // note variables cant start with a number.
+        if (isalpha(c)) {
         return true;
-    }else if(c == '*') {
-        return true;
-    }else if(c == '-'){
-        return true;
-    }else if(c == '+'){
-        return true;
-    }else if(c == '/'){
-        return true;
-    }else if(c == '='){
-        return true;
+        }else if(c == '*') {
+            return true;
+        }else if(c == '-'){
+            return true;
+        }else if(c == '+'){
+            return true;
+        }else if(c == '/'){
+            return true;
+        }else if(c == '%'){
+            return true;
+        }else if(c == '^'){
+            return true;
+        }else if(c == '='){
+            return true;
+        }else if(c == '('){
+            return true;
+        }else if(c == ')'){
+            return true;
+        }else if(c == '\"'){
+            return true;
+        }else if(c == '\''){
+            return true;
+        }else if(c == ';'){
+            return true;
+        }else if(c == ','){
+            return true;
+        }else if(c == '['){
+            return true;
+        }else if(c == ']'){
+            return true;
+        }else if(c == '{'){
+            return true;
+        }else if(c == '}'){
+            return true;
+        }
+    }else if(state == 1){
+
     }
+    
 
     return false; 
 }
@@ -56,36 +88,74 @@ Token Tokenizer::getToken() {
     // makes a token with the given line number and char position.
     Token token(lineNumber, charPosition);
 
-    //state 0 of our dfa, havent seen any input or returning from previus states.
+    //state 0 of our dfa, havent seen any input or returning from previus states. grabs identifiers
     if(state == 0){
 
-    //std::cout<<"looping through on state 0"<<std::endl;
-    //this eats up all non esential input we dont care about, such as spaces not inside a string token.
-    while (inputStream.get(c) && !charOfInterest(c)) {
-        charPosition++;
+        //std::cout<<"looping through on state 0"<<std::endl;
+        //this eats up all non esential input we dont care about, such as spaces not inside a string token.
+        while (inputStream.get(c) && !charOfInterest(c)) {
+            charPosition++;
 
-    }
-
-    if (inputStream.eof()) {
-        token.setEndOfFile();
-        return token;
-    //found a identifier
-    }else if(isalnum(c)){
-        //std::cout<<"found identifier"<<std::endl;
-        //grab all the rest of the characters in the identifier
-        tempText += c;
-        while (inputStream.get(c) && c != ' ') {
-        tempText += c;
-        charPosition++;
         }
 
-        //set token and return it
-        token.setIdentifier(tempText);
+        if (inputStream.eof()) {
+            token.setEndOfFile();
+            return token;
+        //found a identifier
+        }else if(isalpha(c)){
+            //std::cout<<"found identifier"<<std::endl;
+            //grab all the rest of the characters in the identifier
+            tempText += c;
+            while (inputStream.get(c) && c != ' ' && c != '(' && c != ')' && c != ';') {
+            tempText += c;
+            charPosition++;
+            }
 
-        return token;
+            inputStream.putback(c);
 
-    }
+            //set token and return it
+            token.setIdentifier(tempText);
+
+            return token;
+
+        }else if(c == '('){
+            token.setLParen();
+
+            return token;
+        }else if(c == ')'){
+            token.setRParen();
+
+            return token;
+        }else if(c == '{'){
+            token.setLBrace();
+
+            return token;
+        }else if(c == '}'){
+            token.setRBrace();
+
+            return token;
+        }else if(c == ';'){
+            token.setSemicolon();
+
+            return token;
+        }else if(c == '='){
+            token.setAssignmentOperator();
+
+            return token;
+        }
     
+    //state if we find a double quote chane the way we take in tokens to treat everything after the first quote
+    //and change state once we find another double quote token.
+    }else if(state == 1){
+
+
+    //need a state to handle single quotes similiar to string except we expect to see one token, then another single quote
+    }else if(state == 2){
+
+
+    //state to handle the assignment opperator and a data type. go to this state if we find a token that is a data type.
+    //need to handle what type of data is being assigned
+    }else if(state == 3){
 
     }
 
