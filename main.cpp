@@ -16,7 +16,7 @@ how to run makefile
 description:
 Write a program in C or C++ that tokenize a c file.
 
-Write a program in C or C++ that will identify and remove comments from an input test file using 
+Write a program in C or C++ that will identify and remove comments from an input test file using
 a deterministic finite state automoton (DFA) then use a DFA to convert the input file into a series
 of tokens. Lastly, your program should display the tokens as output (if no syntax errors occurred)
 or an error message instead.
@@ -75,7 +75,7 @@ int main(int argc, char *argv[]) {
     //creates a decent name for each input file so it saves to different test files based on its name
     ofstream result("./" + tokenizeFile, ios::out);
 
-    //pipe in the the file 
+    //pipe in the the file
     result << output;
 
     result.close();
@@ -104,12 +104,12 @@ void parseTokens(Tokenizer& tempTokenizer){
 
     //as long as the token recieved is not a eof keep looping through the file.
     while (!tempToken.isEOF()) {
-        //keep grabbing new tokens and setting the next token as temptoken until we 
+        //keep grabbing new tokens and setting the next token as temptoken until we
         //run out of tokens.
 
-        Token tempToken = tempTokenizer.getToken();
+        tempToken = tempTokenizer.getToken();
         tempToken.print();
-    
+
     }
 
 
