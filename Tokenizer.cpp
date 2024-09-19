@@ -143,8 +143,20 @@ Token Tokenizer::getToken() {
 
             return token;
         }else if(c == '-'){
-            token.setMinus();
+            tempText = '-';
+            inputStream.get(c);
+            if (isdigit(c)){
+                tempText += c;
 
+                while(inputStream.get(c) && isdigit(c)){
+                    tempText += c;
+                    charPosition++;
+                }
+                token.setInt(tempText);
+            }else{
+                token.setMinus();
+            }
+            inputStream.putback(c);
             return token;
         }else if(c == '"'){
             token.setDoubleQuote();
@@ -178,13 +190,15 @@ Token Tokenizer::getToken() {
         state = 0;
         return token;
 
-        //need a state to handle single quotes similiar to string except we expect to see one token, then another single quote
     }else if(state == 3){
+
+        //need a state to handle single quotes similiar to string except we expect to see one token, then another single quote
+    }else if(state == 4){
 
 
         //state to handle the assignment opperator and a data type. go to this state if we find a token that is a data type.
         //need to handle what type of data is being assigned
-    }else if(state == 4){
+    }else if(state == 5){
 
     }
 
