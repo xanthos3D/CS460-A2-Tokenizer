@@ -19,7 +19,7 @@ Tokenizer::Tokenizer(std::string name) : lineNumber{ 1 },
 //used to determine if a character is important, aka is a token we care about.
 // for the case of our tokenizer there will be a lot.
 bool Tokenizer::charOfInterest(char c) {
-    
+
     //fill out the list of character we want to look out for when looping
     //if char is a number or a alpha character then we found a craf of interest
     if(state == 0){
@@ -27,7 +27,7 @@ bool Tokenizer::charOfInterest(char c) {
         //if we find a alpha character then we are likely working with a variable
         // note variables cant start with a number.
         if (isalpha(c)) {
-        return true;
+            return true;
         }else if(c == '*') {
             return true;
         }else if(c == '-'){
@@ -62,13 +62,17 @@ bool Tokenizer::charOfInterest(char c) {
             return true;
         }else if(c == '}'){
             return true;
+        }else if(c == '<'){
+            return true;
+        }else if(c == '>'){
+            return true;
         }
     }else if(state == 1){
 
     }
-    
 
-    return false; 
+
+    return false;
 }
 
 // function that makes the token.
@@ -90,7 +94,6 @@ Token Tokenizer::getToken() {
 
     //state 0 of our dfa, havent seen any input or returning from previus states. grabs identifiers
     if(state == 0){
-
         //std::cout<<"looping through on state 0"<<std::endl;
         //this eats up all non esential input we dont care about, such as spaces not inside a string token.
         while (inputStream.get(c) && !charOfInterest(c)) {
@@ -101,14 +104,14 @@ Token Tokenizer::getToken() {
         if (inputStream.eof()) {
             token.setEndOfFile();
             return token;
-        //found a identifier
+            //found a identifier
         }else if(isalpha(c)){
             //std::cout<<"found identifier"<<std::endl;
             //grab all the rest of the characters in the identifier
             tempText += c;
             while (inputStream.get(c) && c != ' ' && c != '(' && c != ')' && c != ';') {
-            tempText += c;
-            charPosition++;
+                tempText += c;
+                charPosition++;
             }
 
             inputStream.putback(c);
@@ -138,24 +141,89 @@ Token Tokenizer::getToken() {
             token.setSemicolon();
 
             return token;
+        }else if(c == '['){
+            token.setLBracket();
+
+            return token;
+        }else if(c == ']'){
+            token.setRBracket();
+
+            return token;
         }else if(c == '='){
             token.setAssignmentOperator();
 
             return token;
+        }else if(c == '+'){
+            token.setPlus();
+
+            return token;
+        }else if(c == '/'){
+            token.setDivide();
+
+            return token;
+        }else if(c == '%'){
+            token.setModulo();
+
+            return token;
+        }else if(c == '*'){
+            token.setAsterisk();
+
+            return token;
+        }else if(c == '^'){
+            token.setCarot();
+
+            return token;
+        }else if(c == '-'){
+            token.setMinus();
+
+            return token;
+        }else if(c == '<'){
+            token.setBoolLT();
+
+            return token;
+        }else if(c == '>'){
+            token.setBoolGT();
+
+            return token;
+        }else if(c == '"'){
+            token.setDoubleQuote();
+            state = 1;
+            return token;
+        }else if(c == ','){
+            token.setComma();
+
+            return token;
         }
-    
-    //state if we find a double quote chane the way we take in tokens to treat everything after the first quote
-    //and change state once we find another double quote token.
+
+        //state if we find a double quote chane the way we take in tokens to treat everything after the first quote
+        //and change state once we find another double quote token.
     }else if(state == 1){
+        while (inputStream.get(c) && c != '"') {
+            tempText += c;
+            charPosition++;
+        }
 
+        inputStream.putback(c);
+        //We found an end double quote, so we can't return to state 0 yet because that looks for opening double quote
+        //state 2 takes on a closing double quote
+        state = 2;
+        //set token and return it
+        token.setString(tempText);
 
-    //need a state to handle single quotes similiar to string except we expect to see one token, then another single quote
+        return token;
     }else if(state == 2){
+        inputStream.get(c);
+        token.setDoubleQuote();
+        state = 0;
+        return token;
 
-
-    //state to handle the assignment opperator and a data type. go to this state if we find a token that is a data type.
-    //need to handle what type of data is being assigned
+        //need a state to handle single quotes similiar to string except we expect to see one token, then another single quote
     }else if(state == 3){
+
+
+        //state to handle the assignment opperator and a data type. go to this state if we find a token that is a data type.
+        //need to handle what type of data is being assigned
+    }else if(state == 4){
 
     }
 
