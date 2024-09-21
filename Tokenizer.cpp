@@ -28,7 +28,10 @@ bool Tokenizer::charOfInterest(char c) {
         // note variables cant start with a number.
         if (isalpha(c)) {
             return true;
-        }else if(c == '*') {
+        }else if(isdigit(c)){
+            return true;
+        }
+        else if(c == '*') {
             return true;
         }else if(c == '-'){
             return true;
@@ -109,7 +112,7 @@ Token Tokenizer::getToken() {
             //std::cout<<"found identifier"<<std::endl;
             //grab all the rest of the characters in the identifier
             tempText += c;
-            while (inputStream.get(c) && c != ' ' && c != '(' && c != ')' && c != ';') {
+            while (inputStream.get(c) && c != ' ' && c != '(' && c != ')' && c != ';' && c != ',') {
                 tempText += c;
                 charPosition++;
             }
@@ -121,6 +124,16 @@ Token Tokenizer::getToken() {
 
             return token;
 
+        }else if(isdigit(c)){
+            tempText += c;
+
+            while(inputStream.get(c) && isdigit(c)){
+                tempText += c;
+                charPosition++;
+            }
+            inputStream.putback(c);
+            token.setInt(tempText);
+            return token;
         }else if(c == '('){
             token.setLParen();
 
@@ -150,8 +163,12 @@ Token Tokenizer::getToken() {
 
             return token;
         }else if(c == '='){
-            token.setAssignmentOperator();
-
+            inputStream.get(c);
+            if(c == '='){
+                token.setBoolE();
+            }else{
+                token.setAssignmentOperator();
+            }
             return token;
         }else if(c == '+'){
             token.setPlus();
@@ -174,16 +191,36 @@ Token Tokenizer::getToken() {
 
             return token;
         }else if(c == '-'){
-            token.setMinus();
+            tempText = '-';
+            inputStream.get(c);
+            if (isdigit(c)){
+                tempText += c;
 
+                while(inputStream.get(c) && isdigit(c)){
+                    tempText += c;
+                    charPosition++;
+                }
+                token.setInt(tempText);
+            }else{
+                token.setMinus();
+            }
+            inputStream.putback(c);
             return token;
         }else if(c == '<'){
-            token.setBoolLT();
-
+            inputStream.get(c);
+            if(c == '='){
+                token.setBoolLTE();
+            }else{
+                token.setBoolLT();
+            }
             return token;
         }else if(c == '>'){
-            token.setBoolGT();
-
+            inputStream.get(c);
+            if(c == '='){
+                token.setBoolGTE();
+            }else{
+                token.setBoolGT();
+            }
             return token;
         }else if(c == '"'){
             token.setDoubleQuote();
