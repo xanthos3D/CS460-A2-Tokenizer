@@ -101,7 +101,7 @@ public:
     std::string getTokenString();
 
     //useful tester function so we can print the tokens and there type.
-    void print();
+    std::string print();
 
 private:
     //misc idenfitier types

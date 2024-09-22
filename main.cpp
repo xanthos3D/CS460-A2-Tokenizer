@@ -16,7 +16,7 @@ how to run makefile
 description:
 Write a program in C or C++ that tokenize a c file.
 
-Write a program in C or C++ that will identify and remove comments from an input test file using 
+Write a program in C or C++ that will identify and remove comments from an input test file using
 a deterministic finite state automoton (DFA) then use a DFA to convert the input file into a series
 of tokens. Lastly, your program should display the tokens as output (if no syntax errors occurred)
 or an error message instead.
@@ -33,7 +33,7 @@ using namespace std;
 function Headers
  *****************************************************************************************/
 string commentParser(std::ifstream& inputStream,string fileName);
-void parseTokens(Tokenizer& tempTokenizer);
+string parseTokens(Tokenizer& tempTokenizer);
 // functions to handle the open and close tags as they come into the parser.
 
 /** **************************************************************************************
@@ -75,7 +75,7 @@ int main(int argc, char *argv[]) {
     //creates a decent name for each input file so it saves to different test files based on its name
     ofstream result("./" + tokenizeFile, ios::out);
 
-    //pipe in the the file 
+    //pipe in the the file
     result << output;
 
     result.close();
@@ -83,7 +83,19 @@ int main(int argc, char *argv[]) {
     // now we open the c code file we generated without comments, by making our tokenizer object and pass in the new file name.
     Tokenizer tokenizer(tokenizeFile);
 
-    parseTokens(tokenizer);
+    //tokenizer output
+    output = parseTokens(tokenizer);
+
+    //name of our new file that we generated
+    tokenizeFile ="output-"+filename;
+
+    //creates a decent name for each input file so it saves to different test files based on its name
+    ofstream result1("./" + tokenizeFile, ios::out);
+
+    //pipe in the the file
+    result1 << output;
+
+    result1.close();
 
     return 0;
 }
@@ -94,23 +106,30 @@ function to get tokens loop through file getting tokens from the tokenizer until
 @pre: takes a tokenizer object
 @post: makes a list of tokens out of our comment fre output file.
  *****************************************************************************************/
-void parseTokens(Tokenizer& tempTokenizer){
+string parseTokens(Tokenizer& tempTokenizer){
+
+
     cout<< "Token list:"<<endl;
+
+    std::string file = "";
+    file+= "\nToken list:\n\n";
 
     //gets the first token of the file
     Token tempToken = tempTokenizer.getToken();
 
-    tempToken.print();
+    file += tempToken.print();
 
     //as long as the token recieved is not a eof keep looping through the file.
     while (!tempToken.isEOF()) {
-        //keep grabbing new tokens and setting the next token as temptoken until we 
+        //keep grabbing new tokens and setting the next token as temptoken until we
         //run out of tokens.
 
-        Token tempToken = tempTokenizer.getToken();
-        tempToken.print();
-    
+        tempToken = tempTokenizer.getToken();
+        file += tempToken.print();
+
     }
+
+    return file;
 
 
 
