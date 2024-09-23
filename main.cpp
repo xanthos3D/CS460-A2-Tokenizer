@@ -24,6 +24,7 @@ or an error message instead.
 #include <iostream>
 #include <fstream>
 #include<stack>
+#include "Parser.hpp"
 #include "Token.hpp"
 #include "Tokenizer.hpp"
 
@@ -34,6 +35,8 @@ function Headers
  *****************************************************************************************/
 string commentParser(std::ifstream& inputStream,string fileName);
 string parseTokens(Tokenizer& tempTokenizer);
+std::vector<Token> buildTokenVector(Tokenizer& sourceFile);
+
 // functions to handle the open and close tags as they come into the parser.
 
 /** **************************************************************************************
@@ -43,7 +46,6 @@ driver program
  *****************************************************************************************/
 int main(int argc, char *argv[]) {
 
-    // we expect the name of the file as an argument to the program.
     if (argc != 2) {
         std::cout << "usage: " << argv[0] << " nameOfAnInputFile" << std::endl;
         exit(1);
@@ -58,46 +60,45 @@ int main(int argc, char *argv[]) {
     }
 
     inputStream.close();
-
     std::cout << "found file: " <<argv[1] << std::endl;
-
-    //create file name without the .c at the end
     string filename = argv[1];
     filename.pop_back();
     filename.pop_back();
 
-    //makes our output file by calling our function
     string output = commentParser(inputStream,argv[1]);
 
-    //name of our new file that we generated
     string tokenizeFile = filename + " without comments.c";
-
-    //creates a decent name for each input file so it saves to different test files based on its name
     ofstream result("./" + tokenizeFile, ios::out);
-
-    //pipe in the the file
     result << output;
-
     result.close();
 
-    // now we open the c code file we generated without comments, by making our tokenizer object and pass in the new file name.
     Tokenizer tokenizer(tokenizeFile);
-
-    //tokenizer output
     output = parseTokens(tokenizer);
 
-    //name of our new file that we generated
     tokenizeFile ="output-"+filename;
-
-    //creates a decent name for each input file so it saves to different test files based on its name
     ofstream result1("./" + tokenizeFile, ios::out);
-
-    //pipe in the the file
     result1 << output;
-
     result1.close();
 
+    Parser parser(tokenizeFile);
+    parser.BuildCST(buildTokenVector(tokenizer));
+    parser.printCST();
     return 0;
+}
+
+//Builds Vector with Tokens
+std::vector<Token> buildTokenVector(Tokenizer& sourceFile){
+    std::vector<Token> tokenVector;
+    Token token = sourceFile.getToken();
+    int index = 0;
+    tokenVector[index] = token;
+
+    while (!token.isEOF()) {
+        index++;
+        token = sourceFile.getToken();
+        tokenVector[index] = token;
+    }
+    return tokenVector;
 }
 
 

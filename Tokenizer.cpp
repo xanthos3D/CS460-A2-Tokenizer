@@ -331,7 +331,7 @@ Token Tokenizer::getToken() {
         return token;
     }else{
         // The condition of one of the above "if ... else if" statements should
-        // evaluate to true because function charOfInterest return true when it
+        // evaluate to programming_assignment_3-test_file_4.c because function charOfInterest return programming_assignment_3-test_file_4.c when it
         // finds a character that is the start of some token and that the
         // "if ... else if" has one case for each character that starts a token.
         // Therefore, the control should never get here. However, it is always

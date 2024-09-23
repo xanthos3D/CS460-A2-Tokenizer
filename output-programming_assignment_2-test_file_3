@@ -61,7 +61,8 @@ Token:      (
 Token type: IDENTIFIER
 Token:      hex_digit
 
-Token type: BOOLEAN_GREATER_THAN_OR EQUALToken:      >=
+Token type: BOOLEAN_GREATER_THAN_OR EQUAL
+Token:      >=
 
 Token type: SINGLE_QUOTE
 Token:      '
@@ -75,7 +76,8 @@ Token:      '
 Token type: RIGHT_PARENTHESIS
 Token:      )
 
-Token type: BOOLEAN_ANDToken:      &&
+Token type: BOOLEAN_AND
+Token:      &&
 
 Token type: LEFT_PARENTHESIS
 Token:      (
@@ -83,7 +85,8 @@ Token:      (
 Token type: IDENTIFIER
 Token:      hex_digit
 
-Token type: BOOLEAN_LESS_THAN_OR EQUALToken:      <=
+Token type: BOOLEAN_LESS_THAN_OR EQUAL
+Token:      <=
 
 Token type: SINGLE_QUOTE
 Token:      '
@@ -149,7 +152,8 @@ Token:      (
 Token type: IDENTIFIER
 Token:      hex_digit
 
-Token type: BOOLEAN_GREATER_THAN_OR EQUALToken:      >=
+Token type: BOOLEAN_GREATER_THAN_OR EQUAL
+Token:      >=
 
 Token type: SINGLE_QUOTE
 Token:      '
@@ -163,7 +167,8 @@ Token:      '
 Token type: RIGHT_PARENTHESIS
 Token:      )
 
-Token type: BOOLEAN_ANDToken:      &&
+Token type: BOOLEAN_AND
+Token:      &&
 
 Token type: LEFT_PARENTHESIS
 Token:      (
@@ -171,7 +176,8 @@ Token:      (
 Token type: IDENTIFIER
 Token:      hex_digit
 
-Token type: BOOLEAN_LESS_THAN_OR EQUALToken:      <=
+Token type: BOOLEAN_LESS_THAN_OR EQUAL
+Token:      <=
 
 Token type: SINGLE_QUOTE
 Token:      '
@@ -243,7 +249,8 @@ Token:      (
 Token type: IDENTIFIER
 Token:      hex_digit
 
-Token type: BOOLEAN_GREATER_THAN_OR EQUALToken:      >=
+Token type: BOOLEAN_GREATER_THAN_OR EQUAL
+Token:      >=
 
 Token type: SINGLE_QUOTE
 Token:      '
@@ -257,7 +264,8 @@ Token:      '
 Token type: RIGHT_PARENTHESIS
 Token:      )
 
-Token type: BOOLEAN_ANDToken:      &&
+Token type: BOOLEAN_AND
+Token:      &&
 
 Token type: LEFT_PARENTHESIS
 Token:      (
@@ -265,7 +273,8 @@ Token:      (
 Token type: IDENTIFIER
 Token:      hex_digit
 
-Token type: BOOLEAN_LESS_THAN_OR EQUALToken:      <=
+Token type: BOOLEAN_LESS_THAN_OR EQUAL
+Token:      <=
 
 Token type: SINGLE_QUOTE
 Token:      '
@@ -453,7 +462,8 @@ Token:      (
 Token type: IDENTIFIER
 Token:      i
 
-Token type: BOOLEAN_LESS_THANToken:      <
+Token type: BOOLEAN_LESS_THAN
+Token:      <
 
 Token type: INTEGER
 Token:      4
@@ -461,7 +471,8 @@ Token:      4
 Token type: RIGHT_PARENTHESIS
 Token:      )
 
-Token type: BOOLEAN_ANDToken:      &&
+Token type: BOOLEAN_AND
+Token:      &&
 
 Token type: LEFT_PARENTHESIS
 Token:      (
@@ -469,7 +480,8 @@ Token:      (
 Token type: IDENTIFIER
 Token:      digit
 
-Token type: BOOLEAN_GREATER_THANToken:      >
+Token type: BOOLEAN_GREATER_THAN
+Token:      >
 
 Token type: INTEGER
 Token:      -1
@@ -540,7 +552,8 @@ Token:      (
 Token type: IDENTIFIER
 Token:      digit
 
-Token type: BOOLEAN_GREATER_THANToken:      >
+Token type: BOOLEAN_GREATER_THAN
+Token:      >
 
 Token type: INTEGER
 Token:      -1
@@ -590,7 +603,8 @@ Token:      (
 Token type: IDENTIFIER
 Token:      digit
 
-Token type: BOOLEAN_GREATER_THANToken:      >
+Token type: BOOLEAN_GREATER_THAN
+Token:      >
 
 Token type: INTEGER
 Token:      -1

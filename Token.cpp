@@ -7,51 +7,25 @@
 #include "Token.hpp"
 
 //default constructor, want to give it line data and set up some default vairables apart of the object.
-Token::Token(int line, int pos) {
-    //misc idenfitier types
-    _identifier = false;
-    _doubleQuote = false;
-    _singleQuote= false;
-     _semicolon= false;
-     _comma= false;
-      _eof= false;
-    //braces and brackets
-    _LParen= false;
-    _RParen= false;
-    _LBrace= false;
-    _RBrace= false;
-    _LBracket= false;
-    _RBracket= false;
-    //opperators
-    _assignmentOperator= false;
-    _modulo= false;
-    _plus= false;
-    _minus= false;
-    _asterisk= false;
-    _divide= false;
-    _caret= false;
-    //data types
-    _int= false;
-    _double= false;
-    _char= false;
-    _string= false;
-    //boolean opperators
-    _boolE= false;
-    _boolNE= false;
-    _boolGT= false;
-    _boolLT= false;
-    _boolGTE= false;
-    _boolLTE= false;
-    _boolAnd= false;
-    _boolOr= false;
-    _boolNot= false;
-    _boolTrue= false;
-    _boolFalse= false;
-    
-    _tokenString = "";
-    _lineNumber = line;
-    _charPos = pos;
-}
+Token::Token(int line, int pos)
+        : _lineNumber(line), _charPos(pos),
+          //Misc
+          _identifier(false), _doubleQuote(false), _singleQuote(false),
+          _semicolon(false), _comma(false), _eof(false),
+          //Brackets & Parenthesis
+          _LParen(false), _RParen(false), _LBrace(false), _RBrace(false),
+          _LBracket(false), _RBracket(false),
+          //Operators
+          _assignmentOperator(false), _modulo(false),
+          _plus(false), _minus(false), _asterisk(false), _divide(false), _caret(false),
+          //Data Types
+          _int(false), _double(false), _char(false), _string(false),
+          //Boolean Ops
+          _boolE(false), _boolNE(false), _boolGT(false), _boolLT(false),
+          _boolGTE(false), _boolLTE(false), _boolAnd(false), _boolOr(false),
+          _boolTrue(false), _boolFalse(false),
+          _tokenString("") {}
+
 
 //set of return functions to tell if a token is if a given type.
 bool& Token::isIdentifier(){ return _identifier;}
@@ -429,6 +403,6 @@ std::string Token::print() {
         }
        output+= "\n";
     }
-    return output; 
+    return output;
 
 }
