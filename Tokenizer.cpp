@@ -9,7 +9,6 @@
 #include <string>
 #include "Tokenizer.hpp"
 //simple function that puts the fstream into the object
-
 Tokenizer::Tokenizer(std::string name) : lineNumber{ 1 },
                                          charPosition{ 1 },
                                          inputFileName{ name } {

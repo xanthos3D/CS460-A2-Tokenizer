@@ -4,15 +4,15 @@
 #include <fstream>
 #include <string>
 #include "Token.hpp"
+#include "CSTNode.h"
 
 class CST {
 public:
-    CST();
-    CST(std::vector<Token>);
-    void SYA();
-    void insert();
-private:
+    CST() : root(nullptr) {}
+    void setRoot(CSTNode* node) { root = node; }
 
+private:
+    CSTNode* root;
 };
 
 

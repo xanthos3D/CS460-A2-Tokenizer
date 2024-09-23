@@ -9,6 +9,16 @@
 
 #include <string>
 
+enum class TokenType {
+    IDENTIFIER,
+    KEYWORD,
+    LITERAL,
+    OPERATOR,
+    PUNCTUATION,
+    EOF_TOKEN,
+    UNKNOWN
+};
+
 class Token {
 public:
     // token recieves a line number ans position
@@ -115,7 +125,7 @@ private:
     //boolean opperators
      _boolE,_boolNE, _boolGT, _boolLT, _boolGTE, _boolLTE, _boolAnd, _boolOr, _boolNot, _boolTrue,  _boolFalse;
 
-
+    TokenType type;
     std::string _tokenString;
     int _lineNumber, _charPos;
 };

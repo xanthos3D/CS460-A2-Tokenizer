@@ -80,9 +80,9 @@ int main(int argc, char *argv[]) {
     result1 << output;
     result1.close();
 
-    Parser parser(tokenizeFile);
-    parser.BuildCST(buildTokenVector(tokenizer));
-    parser.printCST();
+    Parser parser(tokenizer);
+    parser.parse();
+
     return 0;
 }
 

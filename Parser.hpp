@@ -17,15 +17,17 @@
 #include <fstream>
 #include <string>
 #include "Token.hpp"
+#include "Tokenizer.hpp"
 #include "CST.h"
 
 class Parser {
 public:
-    Parser( std::string  );
-    void BuildCST( CST, std::vector<Token> );
-    void printCST();
+    Parser(Tokenizer& tokenizer) : tokenizer(tokenizer), currentToken(tokenizer.getToken()), cst(new CST()) {}
+    CST* parse();
 private:
-
+    Tokenizer tokenizer;
+    Token currentToken;
+    CST* cst;
 };
 
 
