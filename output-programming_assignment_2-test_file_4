@@ -148,7 +148,8 @@ Token:      ;
 Token type: IDENTIFIER
 Token:      i
 
-Token type: BOOLEAN_LESS_THANToken:      <
+Token type: BOOLEAN_LESS_THAN
+Token:      <
 
 Token type: IDENTIFIER
 Token:      num_bytes_read
@@ -195,7 +196,8 @@ Token:      i
 Token type: RIGHT_BRACKET
 Token:      ]
 
-Token type: BOOLEAN_EQUALToken:      ==
+Token type: BOOLEAN_EQUAL
+Token:      ==
 
 Token type: SINGLE_QUOTE
 Token:      '
@@ -248,7 +250,8 @@ Token:      (
 Token type: IDENTIFIER
 Token:      i
 
-Token type: BOOLEAN_GREATER_THANToken:      >
+Token type: BOOLEAN_GREATER_THAN
+Token:      >
 
 Token type: INTEGER
 Token:      0
@@ -276,7 +279,6 @@ Token:      }
 
 Token type: IDENTIFIER
 Token:      else
-
 
 Token type: LEFT_BRACE
 Token:      {
@@ -311,7 +313,8 @@ Token:      (
 Token type: IDENTIFIER
 Token:      num_bytes_read
 
-Token type: BOOLEAN_GREATER_THAN_OR EQUALToken:      >=
+Token type: BOOLEAN_GREATER_THAN_OR EQUAL
+Token:      >=
 
 Token type: INTEGER
 Token:      2
@@ -388,7 +391,8 @@ Token:      (
 Token type: IDENTIFIER
 Token:      i
 
-Token type: BOOLEAN_LESS_THAN_OR EQUALToken:      <=
+Token type: BOOLEAN_LESS_THAN_OR EQUAL
+Token:      <=
 
 Token type: IDENTIFIER
 Token:      half_num_bytes_read
@@ -396,7 +400,8 @@ Token:      half_num_bytes_read
 Token type: RIGHT_PARENTHESIS
 Token:      )
 
-Token type: BOOLEAN_ANDToken:      &&
+Token type: BOOLEAN_AND
+Token:      &&
 
 Token type: IDENTIFIER
 Token:      is_palindrome
@@ -425,7 +430,8 @@ Token:      i
 Token type: RIGHT_BRACKET
 Token:      ]
 
-Token type: BOOLEAN_EQUALToken:      ==
+Token type: BOOLEAN_EQUAL
+Token:      ==
 
 Token type: IDENTIFIER
 Token:      buffer
@@ -481,7 +487,6 @@ Token:      }
 Token type: IDENTIFIER
 Token:      else
 
-
 Token type: LEFT_BRACE
 Token:      {
 
@@ -509,7 +514,8 @@ Token:      (
 Token type: IDENTIFIER
 Token:      num_bytes_read
 
-Token type: BOOLEAN_GREATER_THANToken:      >
+Token type: BOOLEAN_GREATER_THAN
+Token:      >
 
 Token type: INTEGER
 Token:      0
@@ -567,7 +573,6 @@ Token:      }
 
 Token type: IDENTIFIER
 Token:      else
-
 
 Token type: LEFT_BRACE
 Token:      {

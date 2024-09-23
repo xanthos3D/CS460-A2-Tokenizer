@@ -118,7 +118,7 @@ Token Tokenizer::getToken() {
             //std::cout<<"found identifier"<<std::endl;
             //grab all the rest of the characters in the identifier
             tempText += c;
-            while (inputStream.get(c) && c != ' ' && c != '(' && c != ')'&& c != '[' && c != ']'&& c != '{' && c != '}' && c != ';') {
+            while (inputStream.get(c) && c != ' ' && c != '(' && c != ')'&& c != '[' && c != ']'&& c != '{' && c != '}' && c != ';'&& c!= '\n') {
                 tempText += c;
                 charPosition++;
             }
