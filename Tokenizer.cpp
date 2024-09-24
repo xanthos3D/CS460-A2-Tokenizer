@@ -26,9 +26,10 @@ bool Tokenizer::charOfInterest(char c) {
 
         //if we find a alpha character then we are likely working with a variable
         // note variables cant start with a number.
-        if (isalnum(c)) {
-            return true;
-        }else if(c == '*') {
+//        if (isalnum(c)) {
+//            return true;
+//        }else
+        if(c == '*') {
             return true;
         }else if(c == '-'){
             return true;
@@ -101,7 +102,7 @@ Token Tokenizer::getToken() {
 
         //std::cout<<"looping through on state 0"<<std::endl;
         //this eats up all non esential input we dont care about, such as spaces not inside a string token.
-        while (inputStream.get(c) && !charOfInterest(c)) {
+        while (inputStream.get(c) && !charOfInterest(c) && !isalnum(c)) {
             charPosition++;
 
             if(c == '\n'){
@@ -118,7 +119,7 @@ Token Tokenizer::getToken() {
             //std::cout<<"found identifier"<<std::endl;
             //grab all the rest of the characters in the identifier
             tempText += c;
-            while (inputStream.get(c) && c != ' ' && c != '(' && c != ')'&& c != '[' && c != ']'&& c != '{' && c != '}' && c != ';'&& c!= '\n') {
+            while (inputStream.get(c) && c != ' ' && c!= '\n' && !charOfInterest(c)) {
                 tempText += c;
                 charPosition++;
             }
