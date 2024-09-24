@@ -12,9 +12,9 @@ Token::Token(int line, int pos) {
     _identifier = false;
     _doubleQuote = false;
     _singleQuote= false;
-     _semicolon= false;
-     _comma= false;
-      _eof= false;
+    _semicolon= false;
+    _comma= false;
+    _eof= false;
     //braces and brackets
     _LParen= false;
     _RParen= false;
@@ -47,7 +47,7 @@ Token::Token(int line, int pos) {
     _boolNot= false;
     _boolTrue= false;
     _boolFalse= false;
-    
+
     _tokenString = "";
     _lineNumber = line;
     _charPos = pos;
@@ -95,10 +95,10 @@ bool& Token::isBoolFalse(){return _boolFalse;}
 
 
 //create setter functions
-void Token::setIdentifier(std::string input) { 
+void Token::setIdentifier(std::string input) {
     _identifier = true;
     _tokenString = input;
- }
+}
 void Token::setDoubleQuote(){ _doubleQuote = true; }
 void Token::setSingleQuote(){ _singleQuote = true; }
 void Token::setSemicolon(){ _semicolon = true; }
@@ -120,21 +120,21 @@ void Token::setAsterisk(){ _asterisk = true; }
 void Token::setDivide(){ _divide = true; }
 void Token::setCarot(){ _caret = true; }
 
-void Token::setInt(std::string input) { 
+void Token::setInt(std::string input) {
     _int = true;
     _tokenString = input;
 }
 void Token::setDouble(std::string input){
-     _double = true; 
-     _tokenString = input;
+    _double = true;
+    _tokenString = input;
 }
 void Token::setChar(std::string input){
-     _char = true;
-     _tokenString = input;
+    _char = true;
+    _tokenString = input;
 }
 void Token::setString(std::string input){
-     _string = true;
-     _tokenString = input;
+    _string = true;
+    _tokenString = input;
 }
 
 void Token::setBoolE(){ _boolE= true; }
@@ -211,50 +211,50 @@ std::string Token::print() {
             output+= ",";
             output+= "\n";
         }else if(isLParen()){
-            std::cout<< "LEFT_PARENTHESIS" <<std::endl;
+            std::cout<< "L_PAREN" <<std::endl;
             std::cout<<"Token:      "<<"("<<std::endl;
 
-            output+= "LEFT_PARENTHESIS\n";
+            output+= "L_PAREN\n";
             output+= "Token:      ";
             output+= "(";
             output+= "\n";
         }else if(isRParen()){
-            std::cout<< "RIGHT_PARENTHESIS" <<std::endl;
+            std::cout<< "R_PAREN" <<std::endl;
             std::cout<<"Token:      "<<")"<<std::endl;
 
-            output+= "RIGHT_PARENTHESIS\n";
+            output+= "R_PAREN\n";
             output+= "Token:      ";
             output+= ")";
             output+= "\n";
         }else if(isLBrace()){
-            std::cout<< "LEFT_BRACE" <<std::endl;
+            std::cout<< "L_BRACE" <<std::endl;
             std::cout<<"Token:      "<<"{"<<std::endl;
 
-            output+= "LEFT_BRACE\n";
+            output+= "L_BRACE\n";
             output+= "Token:      ";
             output+= "{";
             output+= "\n";
         }else if(isRBrace()){
-            std::cout<< "RIGHT_BRACE" <<std::endl;
+            std::cout<< "R_BRACE" <<std::endl;
             std::cout<<"Token:      "<<"}"<<std::endl;
 
-            output+= "Right_BRACE\n";
+            output+= "R_BRACE\n";
             output+= "Token:      ";
             output+= "}";
             output+= "\n";
         }else if(isLBracket()){
-            std::cout<< "LEFT_BRACKET" <<std::endl;
+            std::cout<< "L_BRACKET" <<std::endl;
             std::cout<<"Token:      "<<"["<<std::endl;
 
-            output+= "LEFT_BRACKET\n";
+            output+= "L_BRACKET\n";
             output+= "Token:      ";
             output+= "[";
             output+= "\n";
         }else if(isRBracket()){
-            std::cout<< "RIGHT_BRACKET" <<std::endl;
+            std::cout<< "R_BRACKET" <<std::endl;
             std::cout<<"Token:      "<<"]"<<std::endl;
 
-            output+= "RIGHT_BRACKET\n";
+            output+= "R_BRACKET\n";
             output+= "Token:      ";
             output+= "]";
             output+= "\n";
@@ -267,10 +267,10 @@ std::string Token::print() {
             output+= "=";
             output+= "\n";
         }else if(isModulo()){
-            std::cout<< "MODULUS" <<std::endl;
+            std::cout<< "MODULO" <<std::endl;
             std::cout<<"Token:      "<<"%"<<std::endl;
 
-            output+= "MODULUS\n";
+            output+= "MODULO\n";
             output+= "Token:      ";
             output+= "%";
             output+= "\n";
@@ -365,34 +365,34 @@ std::string Token::print() {
             output+= "==";
             output+= "\n";
         }else if(isBoolGT()){
-            std::cout<< "BOOLEAN_GREATER_THAN" <<std::endl;
+            std::cout<< "GT" <<std::endl;
             std::cout<<"Token:      "<<">"<<std::endl;
 
-            output+= "BOOLEAN_GREATER_THAN\n";
+            output+= "GT\n";
             output+= "Token:      ";
             output+= ">";
             output+= "\n";
         }else if(isBoolLT()){
-            std::cout<< "BOOLEAN_LESS_THAN" <<std::endl;
+            std::cout<< "LT" <<std::endl;
             std::cout<<"Token:      "<<"<"<<std::endl;
 
-            output+= "BOOLEAN_LESS_THAN\n";
+            output+= "LT\n";
             output+= "Token:      ";
             output+= "<";
             output+= "\n";
         }else if(isBoolGTE()){
-            std::cout<< "BOOLEAN_GREATER_THAN_OR EQUAL" <<std::endl;
+            std::cout<< "GT_EQUAL" <<std::endl;
             std::cout<<"Token:      "<<">="<<std::endl;
 
-            output+= "BOOLEAN_GREATER_THAN_OR EQUAL\n";
+            output+= "GT_EQUAL\n";
             output+= "Token:      ";
             output+= ">=";
             output+= "\n";
         }else if(isBoolLTE()){
-            std::cout<< "BOOLEAN_LESS_THAN_OR EQUAL" <<std::endl;
+            std::cout<< "LT_EQUAL" <<std::endl;
             std::cout<<"Token:      "<<"<="<<std::endl;
 
-            output+= "BOOLEAN_LESS_THAN_OR EQUAL\n";
+            output+= "LT_EQUAL\n";
             output+= "Token:      ";
             output+= "<=";
             output+= "\n";
@@ -416,19 +416,25 @@ std::string Token::print() {
             std::cout<< "BOOLEAN_TRUE" <<std::endl;
             std::cout<<"Token:      "<<"True"<<std::endl;
 
-            output+= "BOOLEAN_GREATER_THAN_OR EQUAL\n";
+            output+= "BOOLEAN_TRUE\n";
             output+= "Token:      ";
-            output+= ">=";
+            output+= "TRUE";
             output+= "\n";
         }else if(isBoolFalse()){
             std::cout<< "BOOLEAN_FALSE" <<std::endl;
             std::cout<<"Token:      "<<"False"<<std::endl;
+
+            output+= "BOOLEAN_FALSE\n";
+            output+= "Token:      ";
+            output+= "FALSE";
+            output+= "\n";
         }else{
-        std::cout << "Token::print -- unknown token.\n" << std::endl;
-        exit(3);
+            std::cout << "Token::print -- unknown token.\n" << std::endl;
+            exit(3);
         }
-       output+= "\n";
+
+        output+= "\n";
     }
-    return output; 
+    return output;
 
 }

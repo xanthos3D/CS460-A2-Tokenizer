@@ -26,9 +26,10 @@ bool Tokenizer::charOfInterest(char c) {
 
         //if we find a alpha character then we are likely working with a variable
         // note variables cant start with a number.
-        if (isalnum(c)) {
-            return true;
-        }else if(c == '*') {
+//        if (isalnum(c)) {
+//            return true;
+//        }else
+        if(c == '*') {
             return true;
         }else if(c == '-'){
             return true;
@@ -101,7 +102,7 @@ Token Tokenizer::getToken() {
 
         //std::cout<<"looping through on state 0"<<std::endl;
         //this eats up all non esential input we dont care about, such as spaces not inside a string token.
-        while (inputStream.get(c) && !charOfInterest(c)) {
+        while (inputStream.get(c) && !charOfInterest(c) && !isalnum(c)) {
             charPosition++;
 
             if(c == '\n'){
@@ -118,7 +119,7 @@ Token Tokenizer::getToken() {
             //std::cout<<"found identifier"<<std::endl;
             //grab all the rest of the characters in the identifier
             tempText += c;
-            while (inputStream.get(c) && c != ' ' && c != '(' && c != ')'&& c != '[' && c != ']'&& c != '{' && c != '}' && c != ';'&& c!= '\n') {
+            while (inputStream.get(c) && c != ' ' && c!= '\n' && !charOfInterest(c)) {
                 tempText += c;
                 charPosition++;
             }
@@ -132,7 +133,7 @@ Token Tokenizer::getToken() {
             return token;
 
         }if (isdigit(c)){
-                tempText += c;
+            tempText += c;
 
             while(inputStream.get(c) && isdigit(c)){
                 tempText += c;
@@ -142,11 +143,11 @@ Token Tokenizer::getToken() {
             //error state for digit exclude all input but valid input.
             //man need more statemens in if to correctly protect agianst all cases where a digit is broken by a symbol
             if(isalpha(c)){
-                
+
                 std::cout<<"Syntax error on line "<<lineNumber<<": invalid integer"<<std::endl;
                 exit(1);
             }
-            
+
             inputStream.putback(c);
             return token;
 
@@ -179,7 +180,7 @@ Token Tokenizer::getToken() {
 
             return token;
         }else if(c == '='){
-            //need a special case where if there is a equal after this then 
+            //need a special case where if there is a equal after this then
             if(inputStream.peek() == '='){
                 //eat up next input
                 inputStream.get(c);
@@ -199,6 +200,11 @@ Token Tokenizer::getToken() {
                     charPosition++;
                 }
                 token.setInt(tempText);
+                if(isalpha(c)){
+
+                    std::cout<<"Syntax error on line "<<lineNumber<<": invalid integer"<<std::endl;
+                    exit(1);
+                }
             }else{
                 token.setMinus();
             }
@@ -225,8 +231,25 @@ Token Tokenizer::getToken() {
 
             return token;
         }else if(c == '+'){
-            token.setPlus();
+            tempText = '+';
+            inputStream.get(c);
+            if (isdigit(c)){
+                tempText += c;
 
+                while(inputStream.get(c) && isdigit(c)){
+                    tempText += c;
+                    charPosition++;
+                }
+                token.setInt(tempText);
+                if(isalpha(c)){
+
+                    std::cout<<"Syntax error on line "<<lineNumber<<": invalid integer"<<std::endl;
+                    exit(1);
+                }
+            }else{
+                token.setPlus();
+            }
+            inputStream.putback(c);
             return token;
         }else if(c == '>'){
             if(inputStream.peek() == '='){
@@ -297,9 +320,9 @@ Token Tokenizer::getToken() {
         state = 0;
         return token;
 
-    //state to handle interior of single quotes.
+        //state to handle interior of single quotes.
     }else if(state == 3){
-         while (inputStream.get(c) && c != '\'') {
+        while (inputStream.get(c) && c != '\'') {
             tempText += c;
             charPosition++;
         }
@@ -312,12 +335,12 @@ Token Tokenizer::getToken() {
         token.setString(tempText);
 
         return token;
-    //state to handle ending '
+        //state to handle ending '
     }else if(state == 4){
         inputStream.get(c);
         token.setSingleQuote();
         state = 0;
-        return token; 
+        return token;
     }
 
 
